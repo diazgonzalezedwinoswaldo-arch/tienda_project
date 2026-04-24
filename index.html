@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Tienda - Dashboard de datos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>📊 Panel de control - Mi Tienda</h1>
+        <p>Datos extraídos del proyecto de base de datos (sin conexión en vivo, solo vista estática).</p>
+    </header>
+
+    <nav>
+        <button class="tab-btn active" data-tab="productos">📦 Productos</button>
+        <button class="tab-btn" data-tab="categorias">🏷️ Categorías</button>
+        <button class="tab-btn" data-tab="clientes">👥 Clientes</button>
+        <button class="tab-btn" data-tab="pedidos">🛒 Pedidos</button>
+        <button class="tab-btn" data-tab="detalles">📄 Detalle de pedidos</button>
+    </nav>
+
+    <!-- TABLA DE  PRODUCTOS -->
+    <div id="productos" class="tab-content active">
+        <h2>Lista de productos en inventario</h2>
+        <table>
+            <thead>
+                <tr><th>ID</th><th>Nombre</th><th>Precio</th><th>Stock</th><th>Categoría ID</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>1</td><td>camiseta</td><td>$15.99</td><td>50</td><td>1</td></tr>
+                <tr><td>2</td><td>Pantalon</td><td>$29.99</td><td>30</td><td>1</td></tr>
+                <tr><td>3</td><td>Zapatos</td><td>$49.99</td><td>20</td><td>2</td></tr>
+                <tr><td>4</td><td>Gorra</td><td>$9.99</td><td>100</td><td>3</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- TABLA DE  CATEGORÍAS -->
+    <div id="categorias" class="tab-content">
+        <h2>Categorías registradas</h2>
+        <table>
+            <thead><tr><th>ID</th><th>Nombre</th><th>Descripción</th></tr></thead>
+            <tbody>
+                <tr><td>1</td><td>Ropa</td><td>Prendas de vestir para hombre y mujer</td></tr>
+                <tr><td>2</td><td>Calzado</td><td>Zapatos, tenis y sandalias</td></tr>
+                <tr><td>3</td><td>Accesorios</td><td>Gorras, cinturones, joyería</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- TABLAS DE CLIENTES -->
+    <div id="clientes" class="tab-content">
+        <h2>Clientes frecuentes</h2>
+        <div class="card-grid">
+            <div class="card"><h3>Juan Pérez</h3><p>📧 juan@email.com<br>📞 555-1234<br>📍 Calle Principal 123</p></div>
+            <div class="card"><h3>María García</h3><p>📧 maria@email.com<br>📞 555-5678<br>📍 Avenida Central 456</p></div>
+            <div class="card"><h3>Carlos López</h3><p>📧 carlos@email.com<br>📞 555-9012<br>📍 Plaza Mayor 789</p></div>
+        </div>
+    </div>
+
+    <!-- TABLA DE  PEDIDOS -->
+    <div id="pedidos" class="tab-content">
+        <h2>Pedidos registrados</h2>
+        <table>
+            <thead><tr><th>ID Pedido</th><th>Cliente ID</th><th>Fecha</th><th>Total</th><th>Estado</th></tr></thead>
+            <tbody>
+                <tr><td>1</td><td>1 (Juan Pérez)</td><td>2025-04-01 10:23:00</td><td>$81.97</td><td>pagado</td></tr>
+                <tr><td>2</td><td>2 (María García)</td><td>2025-04-02 14:15:00</td><td>$59.96</td><td>pendiente</td></tr>
+                <tr><td>3</td><td>1 (Juan Pérez)</td><td>2025-04-03 09:45:00</td><td>$45.98</td><td>enviado</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- TABLA DEL  DETALLE DE LOS   PEDIDOS -->
+    <div id="detalles" class="tab-content">
+        <h2>Productos por pedido</h2>
+        <table>
+            <thead><tr><th>ID Detalle</th><th>Pedido ID</th><th>Producto</th><th>Cantidad</th><th>Precio unitario</th></tr></thead>
+            <tbody>
+                <tr><td>1</td><td>1</td><td>camiseta</td><td>2</td><td>$15.99</td></tr>
+                <tr><td>2</td><td>1</td><td>Zapatos</td><td>1</td><td>$49.99</td></tr>
+                <tr><td>3</td><td>2</td><td>Pantalon</td><td>1</td><td>$29.99</td></tr>
+                <tr><td>4</td><td>2</td><td>Gorra</td><td>3</td><td>$9.99</td></tr>
+                <tr><td>5</td><td>3</td><td>camiseta</td><td>1</td><td>$15.99</td></tr>
+                <tr><td>6</td><td>3</td><td>Pantalon</td><td>1</td><td>$29.99</td></tr>
+            </tbody>
+        </table>
+        <p style="margin-top: 16px; background:#eef2ff; padding:12px; border-radius:12px;">💡 Nota: Los datos mostrados son los mismos que insertamos en la base de datos MySQL durante el proyecto.</p>
+    </div>
+    <footer>
+        🌐 Página estática con datos de la tienda | Sin backend, sin SQL directo, solo HTML/CSS
+    </footer>
+</div>
+
+<script>
+    const tabs = document.querySelectorAll('.tab-btn');
+    const contents = document.querySelectorAll('.tab-content');
+
+    tabs.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const tabId = btn.getAttribute('data-tab');
+            tabs.forEach(b => b.classList.remove('active'));
+            contents.forEach(c => c.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        });
+    });
+</script>
+</body>
+</html>
